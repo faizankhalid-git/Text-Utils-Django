@@ -42,7 +42,7 @@
 
 
 <div class="container">
-  <form method="get" action="remove_punctuation/">
+  <form method="post" action="remove_punctuation/">{% csrf_token %}
     <div class="form-floating">
   <textarea name="data" class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 200px"></textarea>
   <label for="floatingTextarea2">Enter Text Here</label>

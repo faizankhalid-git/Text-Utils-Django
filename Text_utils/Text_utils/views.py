@@ -9,25 +9,17 @@ def index(request):
 
 
 def remove_punctuation(request):
-    punctuation = request.GET.get('remove_punc', 'default')
-    spaces = request.GET.get('remove_spaces', 'default')
-    cap_first = request.GET.get('cap_first', 'default')
-    remove_space = request.GET.get('remove_space', 'default')
-    new_line = request.GET.get('new_line', 'default')
-    char_count = request.GET.get('char_count', 'default')
-    count = 0
-    data = request.GET.get('data', 'default')
+    punctuation = request.POST.get('remove_punc', 'default')
+    cap_first = request.POST.get('cap_first', 'default')
+    remove_space = request.POST.get('remove_space', 'default')
+    new_line = request.POST.get('new_line', 'default')
+    data = request.POST.get('data', 'default')
     if punctuation == 'on':
         data = data.translate(str.maketrans('', '', string.punctuation))
-    if spaces == 'on':
+    if remove_space == 'on':
         data = ' '.join(data.split())
     if cap_first == 'on':
         data = data.capitalize()
-    if remove_space == 'on':
-        data = data.replace('  ', '')
     if new_line == 'on':
-        data = data.strip()
-    if char_count == 'on':
-        count = len(data)
-
-    return render(request, 'remove_punc.html', {'data': data, 'count': count})
+        data = ' '.join(data.strip().split())
+    return render(request, 'remove_punc.html', {'data': data})
